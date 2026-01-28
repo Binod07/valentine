@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            50% { transform: translateY(-100vh) rotate(180deg); opacity: 0.6; }
+            90% { opacity: 0.3; }
+        }
+        
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-20px) translateX(10px) rotate(5deg); }
+            50% { transform: translateY(-40px) translateX(-10px) rotate(-5deg); }
+            75% { transform: translateY(-20px) translateX(10px) rotate(3deg); }
+        }
+        
+        @keyframes scale-in {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .animate-float { animation: float linear infinite; }
+        .animate-float-slow { animation: float-slow ease-in-out infinite; }
+        .animate-scale-in { animation: scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .animate-gradient { 
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+        
+        .heart-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body class="m-0 p-0">
+    <!-- Main Proposal Screen -->
+    <div id="proposalScreen" class="min-h-screen bg-gradient-to-br from-rose-100 via-pink-100 to-red-100 flex items-center justify-center p-8 relative overflow-hidden">
+        <!-- Animated hearts in background -->
+        <div id="backgroundHearts"></div>
+        
+        <div class="relative z-10 text-center max-w-3xl">
+            <!-- Main proposal card -->
+            <div class="bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl p-12 border-4 border-pink-200 relative">
+                <!-- Decorative hearts -->
+                <div class="absolute -top-6 -left-6 animate-bounce">
+                    <svg class="text-red-500" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
+                <div class="absolute -top-6 -right-6 animate-bounce" style="animation-delay: 0.3s">
+                    <svg class="text-pink-500" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
+                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 animate-bounce" style="animation-delay: 0.6s">
+                    <svg class="text-red-400" width="56" height="56" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
+                
+                <h1 class="text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-pink-600 via-red-500 to-rose-600 bg-clip-text text-transparent leading-tight"
+                    style="font-family: 'Playfair Display', serif;">
+                    Will You Be My Valentine?
+                </h1>
+                
+                <p class="text-2xl md:text-3xl text-gray-700 mb-12 leading-relaxed px-4"
+                   style="font-family: 'Cormorant Garamond', serif;">
+                    You make my heart skip a beat every single day. 
+                    Let's make this Valentine's Day unforgettable together! 💕
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex flex-col items-center gap-6 relative" style="min-height: 200px;">
+                    <button
+                        id="yesButton"
+                        class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-bold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 border-4 border-white"
+                        style="font-family: 'Nunito', sans-serif; font-size: 1.25rem; padding: 0.75rem 2rem;">
+                        YES! 💖
+                    </button>
+
+                    <button
+                        id="noButton"
+                        class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold rounded-full shadow-md transition-all duration-200 absolute border-2 border-gray-400"
+                        style="font-family: 'Nunito', sans-serif; font-size: 0.875rem; padding: 0.5rem 1.5rem; top: 80px;">
+                        Are you sure? 💔
+                    </button>
+                </div>
+
+                <p id="hintMessage" class="mt-8 text-pink-600 text-lg animate-pulse hidden" style="font-family: 'Dancing Script', cursive;">
+                    The "No" button is running away because it knows you belong with me! 💕
+                </p>
+            </div>
+            
+            <!-- Bottom message -->
+            <p class="mt-8 text-gray-600 text-lg italic" style="font-family: 'Cormorant Garamond', serif;">
+                P.S. You can try to click "No"... but we both know what the answer really is 😉
+            </p>
+        </div>
+    </div>
+
+    <!-- Acceptance Screen (hidden initially) -->
+    <div id="acceptanceScreen" class="min-h-screen bg-gradient-to-br from-pink-200 via-red-200 to-pink-300 flex items-center justify-center p-8 relative overflow-hidden hidden">
+        <!-- Floating hearts background -->
+        <div id="celebrationHearts"></div>
+        
+        <div class="relative z-10 text-center">
+            <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-12 max-w-2xl animate-scale-in">
+                <div class="flex justify-center mb-6 gap-2">
+                    <svg class="text-red-500 animate-pulse mx-1" width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <svg class="text-red-500 animate-pulse mx-1" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" style="animation-delay: 0.2s">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <svg class="text-red-500 animate-pulse mx-1" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" style="animation-delay: 0.4s">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <svg class="text-red-500 animate-pulse mx-1" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" style="animation-delay: 0.6s">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <svg class="text-red-500 animate-pulse mx-1" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" style="animation-delay: 0.8s">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
+                
+                <h1 class="text-6xl font-bold mb-6 bg-gradient-to-r from-pink-600 via-red-600 to-pink-600 bg-clip-text text-transparent animate-gradient" 
+                    style="font-family: 'Playfair Display', serif;">
+                    Yay! 🎉
+                </h1>
+                
+                <p class="text-3xl text-gray-800 mb-6 leading-relaxed" 
+                   style="font-family: 'Dancing Script', cursive;">
+                    I knew you'd say yes! ❤️
+                </p>
+                
+                <p class="text-xl text-gray-700 mb-8" 
+                   style="font-family: 'Cormorant Garamond', serif;">
+                    This Valentine's Day is going to be absolutely magical with you! 
+                    I can't wait to make beautiful memories together. 💕
+                </p>
+                
+                <div class="flex justify-center gap-3">
+                    <div class="animate-bounce">❤️</div>
+                    <div class="animate-bounce" style="animation-delay: 0.1s">❤️</div>
+                    <div class="animate-bounce" style="animation-delay: 0.2s">❤️</div>
+                    <div class="animate-bounce" style="animation-delay: 0.3s">❤️</div>
+                    <div class="animate-bounce" style="animation-delay: 0.4s">❤️</div>
+                    <div class="animate-bounce" style="animation-delay: 0.5s">❤️</div>
+                    <div class="animate-bounce" style="animation-delay: 0.6s">❤️</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let noHoverCount = 0;
+        let yesButtonSize = 1;
+        let noButtonSize = 1;
+        
+        const messages = [
+            "Are you sure? 💔",
+            "Really? Think again! 🥺",
+            "Don't break my heart! 💕",
+            "Please reconsider! 😢",
+            "One more chance? 🙏",
+            "You're making a mistake! 😭",
+            "I'll be so sad! 💔",
+            "Pretty please? 🥹"
+        ];
+
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const hintMessage = document.getElementById('hintMessage');
+        const proposalScreen = document.getElementById('proposalScreen');
+        const acceptanceScreen = document.getElementById('acceptanceScreen');
+
+        // Create background hearts for proposal screen
+        const backgroundHearts = document.getElementById('backgroundHearts');
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'absolute animate-float-slow';
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `${Math.random() * 100}%`;
+            heart.style.animationDelay = `${Math.random() * 5}s`;
+            heart.style.animationDuration = `${8 + Math.random() * 4}s`;
+            
+            const size = 30 + Math.random() * 50;
+            heart.innerHTML = `
+                <svg class="text-pink-300 opacity-20" width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            `;
+            backgroundHearts.appendChild(heart);
+        }
+
+        // Yes button hover effect
+        yesButton.addEventListener('mouseenter', () => {
+            yesButtonSize += 0.05;
+            updateYesButton();
+        });
+
+        // Yes button click
+        yesButton.addEventListener('click', () => {
+            proposalScreen.classList.add('hidden');
+            acceptanceScreen.classList.remove('hidden');
+            
+            // Create celebration hearts
+            const celebrationHearts = document.getElementById('celebrationHearts');
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'absolute animate-float';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                heart.style.animationDuration = `${5 + Math.random() * 5}s`;
+                
+                const size = 20 + Math.random() * 40;
+                heart.innerHTML = `
+                    <svg class="text-red-400 opacity-30" width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                `;
+                celebrationHearts.appendChild(heart);
+            }
+        });
+
+        // No button hover effect
+        noButton.addEventListener('mouseenter', () => {
+            noHoverCount++;
+            
+            // Update message
+            noButton.textContent = messages[Math.min(noHoverCount, messages.length - 1)];
+            
+            // Make No button smaller
+            noButtonSize = Math.max(0.3, 1 - noHoverCount * 0.1);
+            
+            // Make Yes button bigger
+            yesButtonSize = 1 + noHoverCount * 0.15;
+            
+            // Random position
+            const maxX = 300;
+            const maxY = 200;
+            const newX = Math.random() * maxX - maxX / 2;
+            const newY = Math.random() * maxY - maxY / 2;
+            
+            noButton.style.transform = `translate(${newX}px, ${newY}px) scale(${noButtonSize})`;
+            noButton.style.fontSize = `${0.875 * noButtonSize}rem`;
+            noButton.style.padding = `${0.5 * noButtonSize}rem ${1.5 * noButtonSize}rem`;
+            noButton.style.opacity = noButtonSize > 0.3 ? 1 : 0.5;
+            
+            updateYesButton();
+            
+            // Show hint message
+            if (noHoverCount > 0) {
+                hintMessage.classList.remove('hidden');
+            }
+        });
+
+        function updateYesButton() {
+            yesButton.style.fontSize = `${1.25 * yesButtonSize}rem`;
+            yesButton.style.padding = `${0.75 * yesButtonSize}rem ${2 * yesButtonSize}rem`;
+            yesButton.style.transform = `scale(${yesButtonSize})`;
+        }
+    </script>
+</body>
+</html>
